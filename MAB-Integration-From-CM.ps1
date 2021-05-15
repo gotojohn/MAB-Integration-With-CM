@@ -7,7 +7,7 @@ Query for valid MAC-adresses from an SCCM/MEMCM abd updates AD Users (used for M
 Recommendations: Run only on Microsoft Windows OS (Windows Data Protection API). Encryption will not work on other OS! Use with Powershell Version 5.1 (ink. Active Directory Module) or higher.
 
 .NOTES
-Author : Johnny Gordon Tornesjö
+Author : Johnny Gordon
 Version : 1
 Date: 2020-05-11
 
