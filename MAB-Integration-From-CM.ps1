@@ -548,19 +548,11 @@ CredentialFile CM: $Cred_FileCM
 
     Write-Progress -Id 0 -Activity "Main" -Status "Importing from CM $($Config.CMSettings.SMSProvider)" -PercentComplete 10
 
-    #$CMObjects = Import-Csv -path 'C:\Scripts\MAB\TestSets\CM_None.csv' -Delimiter ";" -ErrorAction Stop 
-    #$CMObjects = Import-Csv -path 'C:\Scripts\MAB\TestSets\CM5.csv' -Delimiter ";" -ErrorAction Stop 
-    #$CMObjects = Import-Csv -path 'C:\Scripts\MAB\TestSets\CMBADMACS.csv' -Delimiter ";" -ErrorAction Stop 
-    #$CMObjects = Import-Csv -path 'C:\Scripts\MAB\TestSets\CMMAX.csv' -Delimiter ";" -ErrorAction Stop 
-    #$CMObjects = Import-Csv -path 'C:\Scripts\MAB\TestSets\CMEMPTY.csv' -Delimiter ";" -ErrorAction Stop 
-    #ToDo: Convert to pipeline!
-    #$CMResponse = Get-CMMABQuery -CredUser $CMCredential -ProviderMachineName $Config.CMSettings.SMSProvider -SiteCode $Config.CMSettings.SiteCode -QueryID $Config.CMSettings.QueryID -QueryCollection $Config.CMSettings.QueryCollection -ExpectedProps $Config.CMSettings.QueryValidation.ExpectedProps -ErrorAction Stop
-    $CMResponse = Import-Clixml -path 'C:\Scripts\MAB\TestSets\CMRESPONSE.xml'
+    $CMResponse = Get-CMMABQuery -CredUser $CMCredential -ProviderMachineName $Config.CMSettings.SMSProvider -SiteCode $Config.CMSettings.SiteCode -QueryID $Config.CMSettings.QueryID -QueryCollection $Config.CMSettings.QueryCollection -ExpectedProps $Config.CMSettings.QueryValidation.ExpectedProps -ErrorAction Stop
     Write-Progress -Id 0 -Activity "Running" -Status "Converting CM ($($Config.CMSettings.SMSProvider)) data" -PercentComplete 10
     $CMObjects = $CMResponse | Convert-CMMABQuery -Count ($CMResponse | Measure-Object).Count -QueryTranslation $Config.CMSettings.QueryTranslation -ErrorAction Stop
 
     Write-Progress -Id 0 -Activity "Main" -Status "Importing from AD" -PercentComplete 20
-    #$styx = Import-Csv -path 'C:\temp\TestSets\styx.csv' -Delimiter ";" -ErrorAction Stop
     $ADQueryResults = Get-ADMABUsers -Server $AD_SelectedDC -SearchBase $Config.ADSettings.ChangeBase -CredUser $ADCredential -ErrorAction Stop
 
     if((($CMObjects | Measure-Object).Count -ge $Config.CMSettings.ExpectedMin) -and (($CMObjects | Measure-Object).Count -le $Config.CMSettings.ExpectedMax)){
