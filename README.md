@@ -12,14 +12,17 @@ AD
 3. Create/Define an AD-group used for vlan assignment.
 4. Create/Define a restricted "Service" user (2) to update (Create/Remove) user accounts to the OU and assign membership to the AD-groups.
 
+Config
+1. Populate the config.psd1 file with information as described in the file.
+
 Running as a scheduled task
-1. Place the script in a separate folder (Will be populated with logs and encrypted credentials).
+1. Place the MAB-Integration-With-CM.ps1 & config.psd1 in a separate folder (Will be populated with logs and encrypted credentials).
 2. Define a "Service" users (3) to run the script on the server.
 3. Run the script manually as the selected "Service" users (3) on the server. This will create the encrypted credentials only accessible for that user (3).
 3. Setup a scheduled task as the example "Scheduled_Task_Example.xml".
 
 Running manually
-1. Place the script in a separate folder (Will be populated with logs and encrypted credentials).
+1. Place the MAB-Integration-With-CM.ps1 & config.psd1 in a separate folder (Will be populated with logs and encrypted credentials).
 2. Run the script.
 
 # Verified on 
