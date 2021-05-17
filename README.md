@@ -33,4 +33,5 @@ Running manually
 # Troubleshooting
 Read the logs with cmtrace.exe (Microsoft).
 Run the script with the param "DEBUG" for more details.
+Run the script with the param "TEST" if unsure about the query. View the console and logs.
 If incorrect credentials has been entered, just remove the saved credentials and try again. 
