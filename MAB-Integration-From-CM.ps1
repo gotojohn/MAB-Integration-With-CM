@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-MAB Integration From CM
+MAB Integration With CM
 
 .Description
 Query for valid MAC-adresses from an SCCM/MEMCM abd updates AD Users (used for MAB) in an AD.
@@ -12,13 +12,13 @@ Version : 1
 Date: 2020-05-11
 
 .EXAMPLE
-Default usage : PowerShell.exe -ExecutionPolicy Bypass -File .\Update-MAB-V1.ps1 -ScriptAction Run
+Default usage : PowerShell.exe -ExecutionPolicy Bypass -File .\MAB-Integration-With-CM.ps1 -ScriptAction Run
 
 .EXAMPLE
-Test usage (Will not update to AD) : PowerShell.exe -ExecutionPolicy Bypass -File .\Update-MAB-V1.ps1 -ScriptAction Test
+Test usage (Will not update to AD) : PowerShell.exe -ExecutionPolicy Bypass -File .\MAB-Integration-With-CM.ps1 -ScriptAction Test
 
 .EXAMPLE
-Debug usage (Extensive logging) : PowerShell.exe -ExecutionPolicy Bypass -File .\Update-MAB-V1.ps1 -ScriptAction Debug
+Debug usage (Extensive logging) : PowerShell.exe -ExecutionPolicy Bypass -File .\MAB-Integration-With-CM.ps1 -ScriptAction Debug
 
 #>
 param(
@@ -896,7 +896,7 @@ $VerbosePreference = 'SilentlyContinue'
 $DebugPreference = 'SilentlyContinue'
 
 #Name and version of the script
-$Script_Name = "MAB_Integration_From_CM"
+$Script_Name = "MAB_Integration_With_CM"
 $Script_Version = "V1" 
 $Script_Title = "$Script_Name-$Script_Version"
 
@@ -913,7 +913,7 @@ try{
     Start-Log -Title $Script_Title
 
     #Start the MainScript!
-    if ($ScriptAction.ToUpper().Equals("RUN") -or $ScriptAction.ToLower().Equals("debug")){
+    if ($ScriptAction.ToUpper().Equals("RUN") -or $ScriptAction.ToUpper().Equals("DEBUG")){
         Start-MainScript -ErrorAction Stop
     }
     elseif($ScriptAction.ToUpper().Equals("TEST")){
