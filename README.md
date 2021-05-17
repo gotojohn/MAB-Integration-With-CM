@@ -8,7 +8,7 @@ Powershell 5.1 with ActiveDirectory module 1.0.1.0
 
 # Installation
 SCCM/MEMCM
-1. Create a Query in SCCM/MEMCM for all the approved MAC-adresses (Will require som filtering). Include properties from the computer that will be used to make a description.
+1. Create a Query in SCCM/MEMCM for all the approved MAC-adresses (Will require som filtering). Include properties from the computer that will be used to create a description. 
 2. Create/Define a restricted "Service" User (1) to run the Query.
 
 AD
@@ -28,5 +28,9 @@ Running as a scheduled task
 
 Running manually
 1. Place the MAB-Integration-With-CM.ps1 & config.psd1 in a separate folder (Will be populated with logs and encrypted credentials).
-2. Run the script.
+2. Run the script with param "RUN".
 
+Troubleshooting
+Read the logs with cmtrace.exe (Microsoft). 
+Run the script with the param "DEBUG" for more details.
+If incorrect credentials has been entered, just remove the saved credentials and try again. 
