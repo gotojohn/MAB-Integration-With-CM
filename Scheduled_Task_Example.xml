@@ -2,9 +2,9 @@
 <Task version="1.4" xmlns="http://schemas.microsoft.com/windows/2004/02/mit/task">
   <RegistrationInfo>
     <Date>2021-05-11T10:49:37.1246604</Date>
-    <Author>MY\Johnny</Author>
+    <Author>Johnny</Author>
     <Description>Runs the script that updates MAC-adresses in AD that are approved for MAB by a specified CM Query.</Description>
-    <URI>\MAB_Integration_From_CM</URI>
+    <URI>\MAB_Integration_With_CM</URI>
   </RegistrationInfo>
   <Triggers>
     <CalendarTrigger>
@@ -50,7 +50,7 @@
   <Actions Context="Author">
     <Exec>
       <Command>powershell.exe</Command>
-      <Arguments>-File C:\Scripts\MAB\MAB_Integration_From_CM-V1.ps1 -ScriptAction Run exit $LASTEXITCODE</Arguments>
+      <Arguments>-File C:\Scripts\MAB\MAB_Integration_With_CM.ps1 -ScriptAction Run exit $LASTEXITCODE</Arguments>
     </Exec>
   </Actions>
 </Task>
