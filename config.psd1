@@ -2,6 +2,7 @@
 #These settings will be loaded by the main script.
     
     #Version of the configurationfile
+    #Update freely.
     Version = "1.0"
 
     #Information about the Active Directory (AD) Domain
