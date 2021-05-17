@@ -30,7 +30,7 @@ Running manually
 1. Place the MAB-Integration-With-CM.ps1 & config.psd1 in a separate folder (Will be populated with logs and encrypted credentials).
 2. Run the script with param "RUN".
 
-Troubleshooting
-Read the logs with cmtrace.exe (Microsoft). 
+# Troubleshooting
+Read the logs with cmtrace.exe (Microsoft).
 Run the script with the param "DEBUG" for more details.
 If incorrect credentials has been entered, just remove the saved credentials and try again. 
