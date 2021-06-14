@@ -904,14 +904,14 @@ $Script_Title = "$Script_Name-$Script_Version"
 Write-Host "$Script_Title"
 
 try{
+    #Start logging
+    Start-Log -Title $Script_Title
+    
     #Set the global DEBUG variable
     if($ScriptAction.ToUpper().Equals("DEBUG")){
         Write-Log "Running script in DEBUG mode!" -CopyToHost -LogLevel 2
         $global:DebugMode = $true
     }
-
-    #Start logging
-    Start-Log -Title $Script_Title
 
     #Start the MainScript!
     if ($ScriptAction.ToUpper().Equals("RUN") -or $ScriptAction.ToUpper().Equals("DEBUG")){
