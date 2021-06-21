@@ -423,7 +423,7 @@ Function Send-ReportByMail{
                     ValueFromPipeline)]
         [pscustomobject]$Stats,
         [parameter(Mandatory=$true)]
-        [string]$Recipient,
+        $Recipient,
         [parameter(Mandatory=$true)]
         [string]$Sender,
         [parameter(Mandatory=$true)]
