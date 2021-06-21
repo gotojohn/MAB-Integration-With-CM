@@ -10,7 +10,7 @@ Recommendations: Run only on Microsoft Windows OS (Windows Data Protection API).
 Author : Johnny Gordon
 Github : https://github.com/gotojohn/MAB-Integration-With-CM.git
 Version : 1
-Date: 2020-05-11
+Date: 2020-06-21
 
 .EXAMPLE
 Default usage : PowerShell.exe -ExecutionPolicy Bypass -File .\MAB-Integration-With-CM.ps1 -ScriptAction Run
@@ -429,6 +429,8 @@ Function Send-ReportByMail{
         [parameter(Mandatory=$true)]
         [string]$SMTPServer,
         [parameter(Mandatory=$true)]
+        [string]$Identifier,
+        [parameter(Mandatory=$true)]
         [string]$CM_SMSProvider,
         [parameter(Mandatory=$true)]
         [string]$CM_QueryID,
@@ -438,12 +440,18 @@ Function Send-ReportByMail{
         [string]$AD_Domain
     )
     #ToDo: Replace with "mailkit".
-
-    $MailSubject = "Updated MAB - Report"
+    
+    #Create the email subject
+    $MailSubject = "MAB Integration With CM - Report"
+    #Include an Identifier in the subject if it exists.
+    if($id -ne ""){
+        $MailSubject += " - $Identifier"
+    }
+    
     $MailBody = 
 @"
-    A total of $($Stats.Created+$Stats.Updated+$Stats.Kept) MAC addresses where approved by '$CM_SMSProvider' (Query: '$CM_QueryID', Collection: '$CM_QueryCollectionID').
-    The approval was updated to '$AD_Domain' @ $(Get-Date -Format "yyyy-MM-dd HH:mm")
+    A total of $($Stats.Created+$Stats.Updated+$Stats.Kept) MAC addresses where approved by $CM_SMSProvider (Query: $CM_QueryID, Collection: $CM_QueryCollectionID).
+    The approval was updated to $AD_Domain @ $(Get-Date -Format "yyyy-MM-dd HH:mm")
 
     Statistics
     Created (New): $($Stats.Created)
@@ -483,7 +491,7 @@ Function Start-MainScript{
     #Load the config settings.
     $ConfigPath = Join-Path $PSScriptRoot 'config.psd1'
     $Config = Import-PowerShellDataFile $ConfigPath -ErrorAction Stop
-    $ConfigFileInfo = "Configurationfile Info: Version: $($Config.Version), Owner: $((Get-Acl -Path $ConfigPath).Owner), CreationTime: $((Get-ItemProperty -Path $ConfigPath).CreationTime), LastWriteTime: $((Get-ItemProperty -Path $ConfigPath).LastWriteTime)"
+    $ConfigFileInfo = "Configurationfile Info: Version: $($Config.Version), Identifier: $($Config.Identifier), Owner: $((Get-Acl -Path $ConfigPath).Owner), CreationTime: $((Get-ItemProperty -Path $ConfigPath).CreationTime), LastWriteTime: $((Get-ItemProperty -Path $ConfigPath).LastWriteTime)"
     Write-Log $ConfigFileInfo -Masked:$false
 
     #Path to the stored credential to AD and CM
@@ -578,6 +586,7 @@ CredentialFile CM: $Cred_FileCM
                 Recipient = $Config.OtherSettings.Mail.Recipient
                 Sender = $Config.OtherSettings.Mail.Sender
                 SMTPServer = $Config.OtherSettings.Mail.SMTPServer
+                Identifier = $Config.Identifier
                 CM_SMSProvider = $Config.CMSettings.SMSProvider
                 CM_QueryID = $Config.CMSettings.QueryID
                 CM_QueryCollectionID = $Config.CMSettings.QueryCollection
