@@ -4,6 +4,10 @@
     #Version of the configurationfile
     #Update freely.
     Version = "1.0"
+    
+    #Your identifier for this MAB integration. Eg. "VLAN 007". 
+    #Useful if multiple integrations is in use.
+    Identifier = ""
 
     #Information about the Active Directory (AD) Domain
     ADSettings = @{
