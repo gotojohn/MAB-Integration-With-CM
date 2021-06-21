@@ -505,8 +505,6 @@ Function Start-MainScript{
     $CMObjects = $null
     $CMCredential = $null
     $ADCredential = $null
-    $cm = $null
-    $styx = $null
     
     #Show Settings
     $BaseSettings = 
