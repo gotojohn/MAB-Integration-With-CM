@@ -433,21 +433,23 @@ Function Send-ReportByMail{
         [parameter(Mandatory=$true)]
         [string]$CM_QueryID,
         [parameter(Mandatory=$true)]
+        [string]$CM_QueryCollectionID,
+        [parameter(Mandatory=$true)]
         [string]$AD_Domain
     )
     #ToDo: Replace with "mailkit".
 
-    $MailSubject = "Updated Staging - Report"
+    $MailSubject = "Updated MAB - Report"
     $MailBody = 
 @"
-    A total of $($Stats.Created+$Stats.Updated+$Stats.Kept) MAC addresses where approved for staging by '$CM_SMSProvider' (Query: '$CM_QueryID').
+    A total of $($Stats.Created+$Stats.Updated+$Stats.Kept) MAC addresses where approved by '$CM_SMSProvider' (Query: '$CM_QueryID', Collection: '$CM_QueryCollectionID').
     The approval was updated to '$AD_Domain' @ $(Get-Date -Format "yyyy-MM-dd HH:mm")
 
-    Statistics from the update
-    Created(New): $($Stats.Created)
+    Statistics
+    Created (New): $($Stats.Created)
     Updated descriptions: $($Stats.Updated)
+    Kept (Untouched): $($Stats.Kept)
     Removed: $($Stats.Removed)
-    Kept: $($Stats.Kept)
 
     This message was generated on $($env:computername)
 "@
@@ -578,6 +580,7 @@ CredentialFile CM: $Cred_FileCM
                 SMTPServer = $Config.OtherSettings.Mail.SMTPServer
                 CM_SMSProvider = $Config.CMSettings.SMSProvider
                 CM_QueryID = $Config.CMSettings.QueryID
+                CM_QueryCollectionID = $Config.CMSettings.QueryCollection
                 AD_Domain = $Config.ADSettings.Domain
             }
 
